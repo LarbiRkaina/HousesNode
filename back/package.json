@@ -1,0 +1,45 @@
+{
+  "name": "01-config",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "run-p -l type-check:watch start:dev",
+    "start:dev": "nodemon --exec babel-node -r dotenv/config --extensions \".ts\" src/index.ts",
+    "start:console-runners": "npm run type-check && babel-node -r dotenv/config --extensions \".ts\" src/console-runners/index.ts",
+    "start:local-db": "docker-compose up -d",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "build:dev": "tsc --outDir dist",
+    "build:watch": "npm run build:dev -- --watch --preserveWatchOutput",
+    "test": "cross-env MONGO_MEMORY_SERVER_FILE=jest-mongodb-config.cjs jest -c ./config/test/jest.js",
+    "test:watch": "npm run test -- --watchAll -i"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^6.9.0",
+    "npm-run-all": "^4.1.5",
+    "dotenv": "^16.0.3",
+    "mongodb": "^4.13.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "dotenv": "^16.0.3",
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.7",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.18.6",
+    "@types/inquirer": "^9.0.3",
+    "@types/node": "^18.11.18",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "inquirer": "^8.2.5",
+    "nodemon": "^2.0.20",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^4.9.4"
+  },
+  "description": ""
+}
